@@ -34,6 +34,14 @@ class Game
     home_wins
   end
 
+  def away_team_wins
+    away_wins = 0
+    @games.each do |game|
+      away_wins += 1 if game[:away_goals] > game[:home_goals]
+    end
+    away_wins
+  end
+
   def percentage_home_wins
     total_games = @games.size
     return 0 if total_games.zero?
