@@ -44,4 +44,13 @@ RSpec.describe Game do
       expect(@game.away_team_wins).to eq(1)
     end
   end
+
+  describe '#percentage_away_wins' do
+    it 'returns a float' do
+      expect(@game.percentage_away_wins).to be_a(Float)
+    end
+    it 'returns a float' do
+      expect(@game.percentage_away_wins).to eq(33.33)
+    end
+  end
 end
