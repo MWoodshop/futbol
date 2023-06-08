@@ -17,7 +17,20 @@ RSpec.describe Game do
     end
   end
 
+  describe '#home_team_wins' do
+    it 'returns an integer' do
+      expect(@game.home_team_wins).to be_a(Integer)
+    end
+
+    it 'returns number of home team wins' do
+      expect(@game.home_team_wins).to eq(2)
+    end
+  end
+
   describe '#percentage_home_wins' do
+    it 'returns a float' do
+      expect(@game.percentage_home_wins).to be_a(Float)
+    end
     it 'returns a float' do
       expect(@game.percentage_home_wins).to eq(66.67)
     end
