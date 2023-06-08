@@ -12,9 +12,9 @@ class Game
         game_id: row[:game_id],
         season_id: row[:season],
         game_date: row[:date_time],
-        away_team_id: row[:away_team_id],
+        visitor_team_id: row[:away_team_id],
         home_team_id: row[:home_team_id],
-        away_goals: row[:away_goals].to_i,
+        visitor_goals: row[:away_goals].to_i,
         home_goals: row[:home_goals].to_i,
         venue_name: row[:venue],
         venue_api_url: row[:venue_link]
@@ -26,17 +26,17 @@ class Game
   def home_team_wins
     home_wins = 0
     @games.each do |game|
-      home_wins += 1 if game[:home_goals] > game[:away_goals]
+      home_wins += 1 if game[:home_goals] > game[:visitor_goals]
     end
     home_wins
   end
 
-  def away_team_wins
-    away_wins = 0
+  def visitor_team_wins
+    visitor_wins = 0
     @games.each do |game|
-      away_wins += 1 if game[:away_goals] > game[:home_goals]
+      visitor_wins += 1 if game[:visitor_goals] > game[:home_goals]
     end
-    away_wins
+    visitor_wins
   end
 
   def percentage_home_wins
@@ -46,11 +46,11 @@ class Game
     (home_team_wins.to_f / total_games * 100).round(2)
   end
 
-  def percentage_away_wins
+  def percentage_visitor_wins
     total_games = @games.size
     return 0 if total_games.zero?
 
-    (away_team_wins.to_f / total_games * 100).round(2)
+    (visitor_team_wins.to_f / total_games * 100).round(2)
   end
 end
 
