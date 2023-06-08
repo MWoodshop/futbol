@@ -17,4 +17,10 @@ class League
   def total_games
     games.count
   end
+
+  def count_of_teams
+    teams.count
+  end
 end
+
+
