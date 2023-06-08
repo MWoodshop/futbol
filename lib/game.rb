@@ -1,60 +1,25 @@
-require 'csv'
-
 class Game
-  attr_reader :games
+  attr_reader :game_id,
+              :season_id,
+              :season_type,
+              :game_date,
+              :away_team_id,
+              :home_team_id,
+              :away_team_goals,
+              :home_team_goals,
+              :venue_name,
+              :venue_link
 
-  def initialize
-    @games = []
-    data = CSV.parse(File.read('./data/games.csv'), headers: true, header_converters: :symbol)
-
-    data.each do |row|
-      game = {
-        game_id: row[:game_id],
-        season_id: row[:season],
-        game_date: row[:date_time],
-        visitor_team_id: row[:away_team_id],
-        home_team_id: row[:home_team_id],
-        visitor_goals: row[:away_goals].to_i,
-        home_goals: row[:home_goals].to_i,
-        venue_name: row[:venue],
-        venue_api_url: row[:venue_link]
-      }
-      @games << game
-    end
-  end
-
-  def home_team_wins
-    home_wins = 0
-    @games.each do |game|
-      home_wins += 1 if game[:home_goals] > game[:visitor_goals]
-    end
-    home_wins
-  end
-
-  def visitor_team_wins
-    visitor_wins = 0
-    @games.each do |game|
-      visitor_wins += 1 if game[:visitor_goals] > game[:home_goals]
-    end
-    visitor_wins
-  end
-
-  def percentage_home_wins
-    total_games = @games.size
-    return 0 if total_games.zero?
-
-    (home_team_wins.to_f / total_games * 100).round(2)
-  end
-
-  def percentage_visitor_wins
-    total_games = @games.size
-    return 0 if total_games.zero?
-
-    (visitor_team_wins.to_f / total_games * 100).round(2)
+  def initialize(attributes)
+    @game_id = attributes[:game_id]
+    @season_id = attributes[:season]
+    @season_type = attributes[:type]
+    @game_date = attributes[:date_time]
+    @away_team_id = attributes[:away_team_id]
+    @home_team_id = attributes[:home_team_id]
+    @away_team_goals = attributes[:away_goals]
+    @home_team_goals = attributes[:home_goals]
+    @venue_name = attributes[:venue]
+    @venue_link = attributes[:venue_link]
   end
 end
-
-# # Debugging begin
-# game = Game.new
-# puts game.percentage_home_wins
-# # Debugging end
