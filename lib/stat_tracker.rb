@@ -5,33 +5,42 @@ require_relative 'season'
 require_relative 'league'
 
 class StatTracker
-  attr_reader :games, :teams, :seasons
+  attr_reader :games, :teams, :seasons, :league
 
   def initialize(locations)
     @games = load_games(locations[:games])
     @teams = load_teams(locations[:teams])
     @seasons = load_seasons(@games)
+    @league = League.new(@teams, @games)
   end
 
   def self.from_csv(locations)
     new(locations)
   end
 
+  # Load game data from CSV file and store it as Game objects in an array
   def load_games(file_path)
     games = []
     CSV.foreach(file_path, headers: true, header_converters: :symbol) do |row|
       games << Game.new(row)
     end
     games
-    # Load game data from CSV file and store it as Game objects in an array
   end
 
+  # Load team data from CSV file and store it as Team objects in an array
   def load_teams(file_path)
-    # Load team data from CSV file and store it as Team objects in an array
+    teams = []
+    CSV.foreach(file_path, headers: true, header_converters: :symbol) do |row|
+      teams << Team.new(row)
+    end
+    teams
   end
 
-  def load_seasons(file_path)
-    # Group games by season and store it as Season objects in an array
+  # Group games by season and store it as Season objects in an array
+  def load_seasons(games)
+    games.group_by(&:season_id).map do |season_id, games_in_season|
+      [season_id, Season.new(season_id, games_in_season)]
+    end.to_h
   end
 
   # Add statistical methods here...
@@ -44,5 +53,9 @@ class StatTracker
   def percentage_visitor_wins
     visitor_wins = @games.count(&:visitor_win?)
     (visitor_wins.to_f / @games.size).round(2)
+  end
+
+  def count_of_teams
+    @league.count_of_teams
   end
 end
