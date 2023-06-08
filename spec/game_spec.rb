@@ -11,7 +11,6 @@ RSpec.describe Game do
     it 'can initialize' do
       expect(@game).to be_a(Game)
     end
-
     it 'returns number of games' do
       expect(@game.games.count).to eq(3)
     end
@@ -33,6 +32,16 @@ RSpec.describe Game do
     end
     it 'returns a float' do
       expect(@game.percentage_home_wins).to eq(66.67)
+    end
+  end
+
+  describe '#away_team_wins' do
+    it 'returns an integer' do
+      expect(@game.away_team_wins).to be_a(Integer)
+    end
+
+    it 'returns number of home team wins' do
+      expect(@game.away_team_wins).to eq(1)
     end
   end
 end
