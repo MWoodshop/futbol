@@ -48,6 +48,13 @@ class Game
 
     (home_team_wins.to_f / total_games * 100).round(2)
   end
+
+  def percentage_away_wins
+    total_games = @games.size
+    return 0 if total_games.zero?
+
+    (away_team_wins.to_f / total_games * 100).round(2)
+  end
 end
 
 # # Debugging begin
