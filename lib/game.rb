@@ -22,4 +22,12 @@ class Game
     @venue_name = attributes[:venue]
     @venue_link = attributes[:venue_link]
   end
+
+  def home_win?
+    home_team_goals > away_team_goals
+  end
+
+  def visitor_win?
+    away_team_goals > home_team_goals
+  end
 end
