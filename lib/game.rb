@@ -1,9 +1,6 @@
 require 'csv'
-require_relative 'csv_headers'
 
 class Game
-  include CSVHeaders
-
   attr_reader :games
 
   def initialize
