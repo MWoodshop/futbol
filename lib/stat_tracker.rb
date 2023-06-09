@@ -3,11 +3,13 @@ require_relative 'game'
 require_relative 'team'
 require_relative 'season'
 require_relative 'league'
+require_relative 'game_team'
 
 class StatTracker
   attr_reader :games, :teams, :seasons, :league
 
   def initialize(locations)
+    @game_teams_by_game_id = load_game_teams(locations[:game_teams])
     @games = load_games(locations[:games])
     @teams = load_teams(locations[:teams])
     @seasons = load_seasons(@games)
@@ -22,7 +24,9 @@ class StatTracker
   def load_games(file_path)
     games = []
     CSV.foreach(file_path, headers: true, header_converters: :symbol) do |row|
-      games << Game.new(row)
+      game_teams = @game_teams_by_game_id[row[:game_id]] || []
+      game = Game.new(row, game_teams)
+      games << game
     end
     games
   end
@@ -43,6 +47,15 @@ class StatTracker
     end.to_h
   end
 
+  def load_game_teams(file_path)
+    game_teams_by_game_id = Hash.new { |hash, key| hash[key] = [] }
+    CSV.foreach(file_path, headers: true, header_converters: :symbol) do |row|
+      game_team = GameTeam.new(row)
+      game_teams_by_game_id[game_team.game_id] << game_team
+    end
+    game_teams_by_game_id
+  end
+
   # Add statistical methods here...
 
   def percentage_home_wins
@@ -57,5 +70,13 @@ class StatTracker
 
   def count_of_teams
     @league.count_of_teams
+  end
+
+  def winningest_coach(season_id)
+    @seasons[season_id].winningest_coach
+  end
+
+  def worst_coach(season_id)
+    @seasons[season_id].worst_coach
   end
 end
