@@ -14,9 +14,9 @@ def initialize(data)
   @games = game_init(data)
   @teams = teams_init(data)
   @game_teams = game_teams_init(data)
-  @seasons = Season.new(@games)
-  @league = League.new(@teams, @games)
-  @game_stats = GameStats.new(@teams)
+  # @seasons = Season.new(@games)
+  # @league = League.new(@teams, @games)
+  # @game_stats = GameStats.new(@teams)
 end
 
 def game_init(data)
@@ -39,5 +39,13 @@ end
       (game1.away_goals + game1.home_goals) <=> (game2.away_goals + game2.home_goals)
     end
     return output.away_goals + output.home_goals
+  end
+
+  def percentage_ties
+    tie_games = @game_teams.find_all do |game|
+      game.game_result.include?("TIE")
+    end
+    results = tie_games.length.to_f / @game_teams.length.to_f
+    results.round(2)
   end
 end
