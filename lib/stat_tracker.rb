@@ -48,4 +48,28 @@ end
     results = tie_games.length.to_f / @game_teams.length.to_f
     results.round(2)
   end
+
+  def count_of_games_by_season
+    ids = []
+    only_ids = []
+      @games.find_all do |game|
+        ids = game.season_id
+        only_ids << ids
+      end
+    uniq_ids = only_ids.uniq
+    count_games = []
+    final_count = Hash.new
+      uniq_ids.each do |id|
+        count_games = @games.find_all {|game|game.season_id.include?(id)}
+        final_count[id] = count_games.length
+      end
+      final_count
+  end
+
+
+
+
+
+
+  
 end
