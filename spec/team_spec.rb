@@ -1,12 +1,13 @@
 require 'spec_helper'
 
+
 describe Team do
   describe '#initialize' do
     it 'exists' do
       info = {
         team_id: '4',
-        franchiseid: '16',
-        teamname: 'Chicago Fire',
+        franchiseId: '16',
+        teamName: 'Chicago Fire',
         abbreviation: 'CHI',
         stadium: 'Toyota Stadium',
         link: '/api/v1/teams/4'
@@ -20,8 +21,8 @@ describe Team do
     it 'has attributes' do
       info = {
         team_id: '4',
-        franchiseid: '16',
-        teamname: 'Chicago Fire',
+        franchiseId: '16',
+        teamName: 'Chicago Fire',
         abbreviation: 'CHI',
         stadium: 'Toyota Stadium',
         link: '/api/v1/teams/4'
@@ -42,3 +43,4 @@ end
 team_path = './data/teams.csv'
 describe Team do
 end
+
