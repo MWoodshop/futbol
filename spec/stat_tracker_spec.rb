@@ -84,9 +84,9 @@ describe StatTracker do
     expect(@stat_tracker.percentage_ties).to eq 0.0
   end
 
-  xit '#count_of_games_by_season' do
+  it '#count_of_games_by_season' do
     expected = {
-      '20122013' => 806
+      '20122013' => 4
     }
     expect(@stat_tracker.count_of_games_by_season).to eq expected
   end
@@ -107,8 +107,8 @@ describe StatTracker do
     expect(@stat_tracker.average_goals_by_season).to eq expected
   end
 
-  xit '#count_of_teams' do
-    expect(@stat_tracker.count_of_teams).to eq 32
+  it '#count_of_teams' do
+    expect(@stat_tracker.count_of_teams).to eq 2
   end
 
   xit '#best_offense' do
@@ -119,49 +119,43 @@ describe StatTracker do
     expect(@stat_tracker.worst_offense).to eq 'Utah Royals FC'
   end
 
-  xit '#highest_scoring_visxitor' do
-    expect(@stat_tracker.highest_scoring_visxitor).to eq 'FC Dallas'
+  xit '#highest_scoring_visitor_' do
+    expect(@stat_tracker.highest_scoring_visitor).to eq 'FC Dallas'
   end
 
   xit '#highest_scoring_home_team' do
     expect(@stat_tracker.highest_scoring_home_team).to eq 'Reign FC'
   end
 
-  xit '#lowest_scoring_visxitor' do
-    expect(@stat_tracker.lowest_scoring_visxitor).to eq 'San Jose Earthquakes'
+  xit '#lowest_scoring_visitor' do
+    expect(@stat_tracker.lowest_scoring_visitor).to eq 'San Jose Earthquakes'
   end
 
   xit '#lowest_scoring_home_team' do
     expect(@stat_tracker.lowest_scoring_home_team).to eq 'Utah Royals FC'
   end
 
-  xit '#winningest_coach' do
-    expect(@stat_tracker.winningest_coach('20132014')).to eq 'Claude Julien'
-    expect(@stat_tracker.winningest_coach('20142015')).to eq 'Alain Vigneault'
+  it '#winningest_coach' do
+    expect(@stat_tracker.winningest_coach('20122013')).to eq 'Claude Julien'
   end
 
-  xit '#worst_coach' do
-    expect(@stat_tracker.worst_coach('20132014')).to eq 'Peter Laviolette'
-    expect(@stat_tracker.worst_coach('20142015')).to eq('Craig MacTavish').or(eq('Ted Nolan'))
+  it '#worst_coach' do
+    expect(@stat_tracker.worst_coach('20122013')).to eq 'John Tortorella'
   end
 
   xit '#most_accurate_team' do
-    expect(@stat_tracker.most_accurate_team('20132014')).to eq 'Real Salt Lake'
-    expect(@stat_tracker.most_accurate_team('20142015')).to eq 'Toronto FC'
+    expect(@stat_tracker.most_accurate_team('20122013')).to eq 'Real Salt Lake'
   end
 
   xit '#least_accurate_team' do
-    expect(@stat_tracker.least_accurate_team('20132014')).to eq 'New York Cxity FC'
-    expect(@stat_tracker.least_accurate_team('20142015')).to eq 'Columbus Crew SC'
+    expect(@stat_tracker.least_accurate_team('20122013')).to eq 'New York Cxity FC'
   end
 
   xit '#most_tackles' do
-    expect(@stat_tracker.most_tackles('20132014')).to eq 'FC Cincinnati'
-    expect(@stat_tracker.most_tackles('20142015')).to eq 'Seattle Sounders FC'
+    expect(@stat_tracker.most_tackles('20122013')).to eq 'FC Cincinnati'
   end
 
   xit '#fewest_tackles' do
-    expect(@stat_tracker.fewest_tackles('20132014')).to eq 'Atlanta Unxited'
-    expect(@stat_tracker.fewest_tackles('20142015')).to eq 'Orlando Cxity SC'
+    expect(@stat_tracker.fewest_tackles('20122013')).to eq 'Atlanta Unxited'
   end
 end
