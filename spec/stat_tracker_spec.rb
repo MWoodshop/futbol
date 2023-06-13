@@ -72,6 +72,7 @@ RSpec.describe StatTracker do
 
   subject(:stat_tracker) { described_class.new(locations) }
 
+<<<<<<< HEAD
   describe 'initialize' do
     it 'imports games, teams, and game_teams data' do
       expect(stat_tracker.games.size).to eq(2)
@@ -134,3 +135,11 @@ RSpec.describe StatTracker do
     end
   end
 end
+=======
+#   describe '#game_tie?' do
+#     it 'returns false when the home team and away team have a different number of goals' do
+#       expect(stat_tracker.game_tie?).to be false
+#     end
+#   end
+# end
+>>>>>>> c5c6149e07a9e291dcbc381997ad93ed04784bcd
