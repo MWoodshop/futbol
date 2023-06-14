@@ -326,12 +326,12 @@ class StatTracker
     end
   end
 
-  def highest_scoring_visitor_team
+  def highest_scoring_visitor
     highest_scoring = team_goal_average('away').max_by { |_team_id, average_goals| average_goals }
     find_team_name(highest_scoring)
   end
 
-  def lowest_scoring_visitor_team
+  def lowest_scoring_visitor
     lowest_scoring = team_goal_average('away').min_by { |_id, average| average }
     find_team_name(lowest_scoring)
   end
